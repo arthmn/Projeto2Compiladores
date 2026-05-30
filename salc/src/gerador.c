@@ -5,8 +5,9 @@
 #include "diag.h"
 
 static FILE *mepa_file = NULL;
-static int rotulo_count = 0;
+static int rotulo_count = 0; // Rastreador global para garantir rótulos únicos
 
+// Cria o arquivo final .mepa em modo de escrita
 void gerador_init(const char *filename) {
     char mepa_name[256];
     sprintf(mepa_name, "%s.mepa", filename);
@@ -16,10 +17,13 @@ void gerador_init(const char *filename) {
     }
 }
 
+// Salva as alterações e fecha o arquivo .mepa gerado
 void gerador_finalize() {
     if (mepa_file) fclose(mepa_file);
 }
 
+// Formata e escreve uma instrução genérica no arquivo MEPA
+// Instruções sem argumento, com 1 argumento ou com 2 argumentos
 void gerar_instr(const char *mnemonic, const char *arg1, const char *arg2) {
     if (!mepa_file) return;
     if (arg1 && arg2) {
@@ -31,11 +35,15 @@ void gerar_instr(const char *mnemonic, const char *arg1, const char *arg2) {
     }
 }
 
+// Escreve um marcador de desvio de fluxo no arquivo
 void gerar_rotulo(const char *rotulo) {
     if (!mepa_file) return;
-    fprintf(mepa_file, "%s:\n", rotulo);
+    fprintf(mepa_file, "%s: NADA\n", rotulo);
 }
 
+// Retorna uma string sequencial única usada para criar 
+// rótulos de desvio em IFs e laços de repetição.
+// Retorna um ponteiro para um buffer interno
 char* novo_rotulo() {
     static char buffer[16];
     rotulo_count++;
