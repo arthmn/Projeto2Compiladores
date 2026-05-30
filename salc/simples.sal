@@ -1,0 +1,5 @@
+module Simples;
+proc main()
+start
+    print("Hello");
+end

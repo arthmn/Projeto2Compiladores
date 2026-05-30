@@ -1,0 +1,10 @@
+module Exemplo;
+globals x, y: int;
+proc main()
+locals z: int;
+start
+    x := 10;
+    y := 20;
+    z := x + y;
+    print(z);
+end

@@ -1,0 +1,2 @@
+module min;
+proc main() start print(1); end
