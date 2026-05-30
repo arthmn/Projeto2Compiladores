@@ -1,5 +1,0 @@
-module Teste;
-proc main()
-start
-    print("Hello");
-end

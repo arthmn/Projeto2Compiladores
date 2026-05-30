@@ -1,5 +1,0 @@
-module minimo;
-proc main()
-start
-    print("OK");
-end
